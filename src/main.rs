@@ -10,8 +10,9 @@ pub fn luhn(cc_number: &str) -> bool {
 
     let mut sum = 0;
     let mut i = 1;
-    for c in no_spaces.rsplit("") {
-        if c.is_empty() {
+    let mut iter = no_spaces.rsplit("");
+    while let Some(c) = iter.next() {
+       if c.is_empty() {
             continue;
         }
 
