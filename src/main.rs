@@ -10,13 +10,9 @@ pub fn luhn(cc_number: &str) -> bool {
 
     let mut sum = 0;
     let mut i = 1;
-    let mut iter = no_spaces.rsplit("");
+    let mut iter = no_spaces.chars().rev();
     while let Some(c) = iter.next() {
-       if c.is_empty() {
-            continue;
-        }
-
-        let digit = c.parse::<i32>().unwrap();
+        let digit = c.to_digit(10).unwrap();
         if i % 2 == 0 {
             let doubled = digit * 2;
             sum += sum_digits(doubled);
@@ -29,7 +25,7 @@ pub fn luhn(cc_number: &str) -> bool {
     sum % 10 == 0
 }
 
-fn sum_digits(mut num: i32) -> i32 {
+fn sum_digits(mut num: u32) -> u32 {
     let mut sum = 0;
     while num != 0 {
         sum += num % 10;
